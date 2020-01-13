@@ -1,0 +1,30 @@
+{
+  "name": "unit-10-oop-homework-template-engine---employee-summary",
+  "version": "1.0.0",
+  "description": "* takes in infomation about employees\r * generates a HTML page\r * built using test driven development methodology",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SILamble/Unit-10-OOP-Homework-Template-Engine---Employee-Summary.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SILamble/Unit-10-OOP-Homework-Template-Engine---Employee-Summary/issues"
+  },
+  "homepage": "https://github.com/SILamble/Unit-10-OOP-Homework-Template-Engine---Employee-Summary#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^7.0.3"
+  }
+}
