@@ -1,9 +1,10 @@
-const inquirer = require(inquirer);
-const fs = require(fs);
+const inquirer = require("inquirer");
+const fs = require("fs");
 const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+const generateHTML = require("./generatehtml");
 
 const teamArray = []
 
@@ -28,12 +29,13 @@ function createManager(){
         },
         {
             type:"input",
-            name: "OfficerNumber",
+            name: "OfficeNumber",
             message:"Enter managers office Number: "
         }
     ]).then(answers => {
-        new Manager (answers.name, answers.Email, answers.id, answers.OfficeNumber);
-            teamArray.push(Manager);
+        const manager = new Manager (answers.Name, answers.Email, answers.id, answers.OfficeNumber);
+            teamArray.push(manager);
+            addMembers();
     })
 };
 
@@ -60,8 +62,9 @@ function createEngineer(){
             message:"Enter engineers GitHub username: "
         }
     ]).then(answers => {
-        new Engineer (answers.name, answers.Email, answers.id, answers.Github);
-            teamArray.push(Engineer);
+        const engineer = new Engineer (answers.Name, answers.Email, answers.id, answers.Github);
+            teamArray.push(engineer);
+            addMembers();
     })
 };
 
@@ -88,7 +91,49 @@ function createIntern(){
             message:"Enter interns school name: "
         }
     ]).then(answers => {
-        new Intern (answers.name, answers.Email, answers.id, answers.school);
-            teamArray.push(Intern);
+        const intern = new Intern (answers.Name, answers.Email, answers.id, answers.School);
+            teamArray.push(intern);
+            addMembers();
     })
 };
+
+// Inquirer functions
+
+function addMembers(){
+    inquirer.prompt([
+        {
+            type: "list",
+            message: "Add a team member?",
+            name: "teamMember",
+            choices: [
+              "Manager",
+              "Engineer",
+              "Intern",
+              "Team complete, no one else to add."
+            ]
+        }
+    ]).then(answers => {
+        console.log(answers.teamMember)
+        //based on answer, create relavent team member (see create role functions)
+        switch(answers.teamMember){
+            case "Manager": 
+                createManager();
+                break;
+            case "Engineer":
+                createEngineer();
+                break;
+            case "Intern":
+                createIntern()
+                break;
+            default:
+                // fs.writeFile("output.html", generateHTML(), function(err) {
+                //     if (err) {
+                //       throw err;
+                //     }})
+                console.log(teamArray);
+        }
+    })
+};
+
+addMembers();
+
